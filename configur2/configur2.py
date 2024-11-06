@@ -85,21 +85,20 @@ if __name__ == '__main__':
     main()
 '''
 
-from heapq import merge
 import os
 import subprocess
 
+def get_commits(mas: list):
+    hashes = []
+    for i in mas:
+        if i.split(' ')[0] == "commit":
+            hashes.append(i.split(' ')[1])
+    return hashes
 
-date_format = "format:'%Y-%m-%d %H:%M:%S'"
-format = "format:'%an %cd'"
-repository_path = "C:/Users/artem/source/repos/CopyPaste"
-branch_name = "main"
-command = (f"git -C {repository_path} --no-pager log "
-                            f"--merges "
-                            f"--pretty=format:'%p' "
-                            f"{branch_name}")
-
-branch = 'CopyPaste'
-PIPE = subprocess.PIPE
-text = os.popen("git -C C:/Users/artem/source/repos/CopyPaste log").read()
-print(text.encode('cp1251').decode('cp866'))
+text_raw_nomerge = os.popen("git -C C:/Users/artem/fireshare log --no-merges").read()
+text_split_nomerge = text_raw_nomerge.splitlines()
+commit_hashes_nomerge = get_commits(text_split_nomerge)
+text_raw_merge = os.popen("git -C C:/Users/artem/fireshare log --merges").read()
+text_split_merge = text_raw_merge.splitlines()
+commit_hashes_merge = get_commits(text_split_merge)
+print(len(commit_hashes_nomerge), len(commit_hashes_merge))
