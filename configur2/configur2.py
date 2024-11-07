@@ -124,9 +124,14 @@ for i in range(len(commits)):
         f.write(f"\t{p1} --> {p3}\n")
         f.write(f"\t{p2} --> {p3}\n")
 
+for i in range(len(commits)):
+    p = commits[i]["hash"][:7]
+    text = os.popen(f"git -C C:/Users/artem/fireshare ls-tree -r --name-only {p}").read()
+    f.write(f"\t{p}({text})\n")
+
 f.close()
-out = os.popen("mmdc -c C:/Users/artem/source/repos/configur2/configur2/init.json -i C:/Users/artem/source/repos/configur2/configur2/temp.mmd -o C:/Users/artem/source/repos/configur2/configur2/output.png").read()
-print(out)
+out = os.popen("mmdc -c C:/Users/artem/source/repos/configur2/configur2/init.json -i C:/Users/artem/source/repos/configur2/configur2/temp.mmd -o C:/Users/artem/source/repos/configur2/configur2/output.svg").read()
+
 #mmdc -i 'input.mmd' -o 'output.png'
 
 # text_raw_nomerge = os.popen("git -C C:/Users/artem/fireshare --no-pager log --no-merges").read()
