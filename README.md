@@ -25,3 +25,5 @@
 ![image](https://github.com/user-attachments/assets/ec2dc78a-6280-4b88-8c1c-609ff1627c7e)
 
 Программа успешно прошла тестирование.
+
+repo url: https://github.com/EverlastingN1ghtfall/configur2
