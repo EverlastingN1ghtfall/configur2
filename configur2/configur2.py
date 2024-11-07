@@ -17,8 +17,10 @@ def get_commits(mas: list):
 
 
 mmd_file = "temp.mmd"
-path = "C:/Users/artem/source/repos/configur1"
+path = input("Path to repo: ")    # "C:/Users/artem/source/repos/configur1"
 dir = os.getcwd()
+of = input("Path to final graph: ")    # f"{dir}\\output.png"
+vis = input("Path to visualizer: ")    # "C:/Users/artem/AppData/Roaming/nvm/v23.1.0/mmdc.cmd"
 f = open(mmd_file, 'w')
 f.write("flowchart TB\n")
 text_raw_full = os.popen(f"git -C {path} --no-pager log").read()
@@ -45,7 +47,7 @@ for i in range(len(commits)):
     f.write(f"\t{p}({text})\n")
 
 f.close()
-out = os.popen(f"mmdc -c {dir}\\init.json -i {dir}\\temp.mmd -o {dir}\\output.png").read()
+out = os.popen(f"mmdc -c {dir}\\init.json -i {dir}\\temp.mmd -o {of}").read()
 print(out)
 #mmdc -i 'input.mmd' -o 'output.png'
 
