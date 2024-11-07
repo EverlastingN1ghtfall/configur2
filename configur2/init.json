@@ -1,4 +1,7 @@
 {
     "maxEdges": 10000,
-    "maxTextSize": 1000000000
+    "maxTextSize": 10000000,
+    "themeVariables": {
+        "fontSize": "20px"
+    }
 }

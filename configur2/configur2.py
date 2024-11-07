@@ -104,9 +104,11 @@ def get_commits(mas: list):
 
 
 mmd_file = "temp.mmd"
+path = "C:/Users/artem/source/repos/configur1"
+dir = os.getcwd()
 f = open(mmd_file, 'w')
 f.write("flowchart TB\n")
-text_raw_full = os.popen("git -C C:/Users/artem/fireshare --no-pager log").read()
+text_raw_full = os.popen(f"git -C {path} --no-pager log").read()
 text_split_full = text_raw_full.splitlines()
 commits = get_commits(text_split_full)
 commits.reverse()
@@ -126,12 +128,12 @@ for i in range(len(commits)):
 
 for i in range(len(commits)):
     p = commits[i]["hash"][:7]
-    text = os.popen(f"git -C C:/Users/artem/fireshare ls-tree -r --name-only {p}").read()
+    text = os.popen(f"git -C {path} ls-tree -r --name-only {p}").read()
     f.write(f"\t{p}({text})\n")
 
 f.close()
-out = os.popen("mmdc -c C:/Users/artem/source/repos/configur2/configur2/init.json -i C:/Users/artem/source/repos/configur2/configur2/temp.mmd -o C:/Users/artem/source/repos/configur2/configur2/output.svg").read()
-
+out = os.popen(f"mmdc -c {dir}\\init.json -i {dir}\\temp.mmd -o {dir}\\output.png").read()
+print(out)
 #mmdc -i 'input.mmd' -o 'output.png'
 
 # text_raw_nomerge = os.popen("git -C C:/Users/artem/fireshare --no-pager log --no-merges").read()
