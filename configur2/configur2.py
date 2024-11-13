@@ -1,5 +1,5 @@
 import os
-import tomllib
+import argparse
 
 def get_commits(mas: list):
     hashes = []
@@ -18,12 +18,17 @@ def get_commits(mas: list):
 
 mmd_file = "temp.mmd"
 dir = os.getcwd()
-path = "C:/Users/Ekaterina/PycharmProjects/konfigur1"
-of = f"{dir}\\output.png"
-vis = "C:/Users/Ekaterina/AppData/Roaming/nvm/v23.2.0/mmdc.cmd"
-# path = input("Path to repo: ")    # "C:/Users/artem/source/repos/configur1"
-# of = input("Path to final graph: ")    # f"{dir}\\output.png"
-# vis = input("Path to visualizer: ")    # "C:/Users/artem/AppData/Roaming/nvm/v23.1.0/mmdc.cmd"
+parser = argparse.ArgumentParser(description='dependencies visualizer')
+parser.add_argument("-r")
+parser.add_argument("-o")
+parser.add_argument("--vis")
+args = parser.parse_args()
+# path = "C:/Users/Ekaterina/PycharmProjects/konfigur1"
+# of = f"{dir}\\output.png"
+# vis = "C:/Users/Ekaterina/AppData/Roaming/nvm/v23.2.0/mmdc.cmd"
+path = args.r    # "C:/Users/artem/source/repos/configur1"
+of = args.o    # f"{dir}\\output.png"
+vis = args.vis    # "C:/Users/artem/AppData/Roaming/nvm/v23.1.0/mmdc.cmd"
 f = open(mmd_file, 'w')
 f.write("flowchart TB\n")
 text_raw_full = os.popen(f"git -C {path} --no-pager log").read()
